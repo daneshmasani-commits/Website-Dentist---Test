@@ -451,11 +451,13 @@ p  { margin: 0 0 1rem; }
   /* Persistent Book Now becomes a full-width sticky bottom bar */
   .book-now {
     left: 0; right: 0; bottom: 0; border-radius: 0;
-    text-align: center; padding: 16px; box-shadow: 0 -4px 16px rgba(0,0,0,0.15);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 12px 16px; line-height: 1;
+    min-height: 48px; box-shadow: 0 -4px 16px rgba(0,0,0,0.15);
     background: var(--navy);
   }
   .book-now:hover { transform: none; }
-  body { padding-bottom: 64px; } /* clearance for sticky bar */
+  body { padding-bottom: 56px; } /* clearance for sticky bar */
 
-  .cookie-banner { bottom: 72px; } /* sit above the sticky book bar */
+  .cookie-banner { bottom: 64px; } /* sit above the sticky book bar */
 }
