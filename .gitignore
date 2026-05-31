@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Python venvs used for image processing (not part of the site)
+.venv*/
+__pycache__/
+
+# Node (not used, but just in case)
+node_modules/
+
+# Editor
+.vscode/
+.idea/
