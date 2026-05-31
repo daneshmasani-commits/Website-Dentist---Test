@@ -91,6 +91,8 @@ p  { margin: 0 0 1rem; }
 
 /* ---------- Layout ---------- */
 .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+/* A touch more breathing room from the screen edges on phones */
+@media (max-width: 600px) { .container { padding: 0 26px; } }
 .container.narrow { max-width: var(--maxw-narrow); }
 
 .section { padding: 64px 0; }

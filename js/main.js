@@ -315,6 +315,11 @@
     var consent = null;
     try { consent = localStorage.getItem(STORAGE_KEY); } catch (e) {}
 
+    // Inline-style helpers so the show/hide works even if a stale (cached)
+    // stylesheet is missing the `[hidden] { display:none }` rule.
+    function hide(el) { if (el) { el.hidden = true; el.style.display = 'none'; } }
+    function showBanner(el) { if (el) { el.hidden = false; el.style.display = 'flex'; } }
+
     function loadMap() {
       if (!mapEmbed || mapEmbed.dataset.loaded) return;
       var src = mapEmbed.getAttribute('data-map-src');
@@ -326,24 +331,26 @@
       iframe.setAttribute('allowfullscreen', '');
       mapEmbed.appendChild(iframe);
       mapEmbed.hidden = false;
+      mapEmbed.style.display = 'block';
       mapEmbed.dataset.loaded = 'true';
-      if (placeholder) placeholder.hidden = true;
+      hide(placeholder);
     }
 
     function setConsent(value) {
       try { localStorage.setItem(STORAGE_KEY, value); } catch (e) {}
-      if (banner) banner.hidden = true;
+      hide(banner);
       if (value === 'accepted') loadMap();
     }
 
-    // Initial state
+    // Initial state — ensure the map iframe stays hidden until consent
+    hide(mapEmbed);
     if (consent === 'accepted') {
-      if (banner) banner.hidden = true;
+      hide(banner);
       loadMap();
     } else if (consent === 'declined') {
-      if (banner) banner.hidden = true;
-    } else if (banner) {
-      banner.hidden = false; // first visit
+      hide(banner);
+    } else {
+      showBanner(banner); // first visit
     }
 
     if (accept) accept.addEventListener('click', function () { setConsent('accepted'); });
